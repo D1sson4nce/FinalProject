@@ -12,9 +12,6 @@ static void initServerTask(void *pvParams) {
 }
 
 static void listenForClientsTask(void *pvParams) {
-    while (!Serial) {
-        ;
-    }
     Serial.println("Initializing web server");
 
     Ethernet.begin(mac, ip);
