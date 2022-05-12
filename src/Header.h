@@ -6,7 +6,6 @@
 #define I2C_ADDRESS 0x48
 
 TaskHandle_t temperatureTask_Handler;
-TaskHandle_t initServerTask_Handler;
 TaskHandle_t listenForClientsTask_Handler;
 
 float temperature = 0;

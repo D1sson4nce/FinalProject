@@ -7,10 +7,6 @@ byte mac[] = {
 IPAddress ip(192, 168, 1, 177);
 EthernetServer server(80);
 
-static void initServerTask(void *pvParams) {
-    
-}
-
 static void listenForClientsTask(void *pvParams) {
     Serial.println("Initializing web server");
 
@@ -19,9 +15,7 @@ static void listenForClientsTask(void *pvParams) {
 
     while (true)
     {
-        Serial.println("Listening..");
         EthernetClient client = server.available();
-        Serial.println(client);
         if (client)
         {
             Serial.println("Client found");
@@ -44,7 +38,7 @@ static void listenForClientsTask(void *pvParams) {
                         // output values
                         client.print("Temperature: ");
                         client.print(temperature);
-                        client.print(" \xC2\xB0");
+                        client.print(" \xB0");
                         client.println("<br />");
                         client.println("</html>");
                         break;
