@@ -1,8 +1,24 @@
 static void temperatureTask(void *sTask){
     I2C i2c(0x48);
+    Button btn(0);
+    bool letGo = true;
+    bool isUsingCelcius = true;
     while(true){
-        int16_t temp = i2c.getFTemp();
-        Serial.println(temp);
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+        if(letGo && btn.isPressed()){
+            letGo = false;
+            if(isUsingCelcius){
+                isUsingCelcius = false;
+            }else{
+                isUsingCelcius = true;
+            }
+        }else if(!btn.isPressed()){
+            letGo = true;
+        }
+        if(isUsingCelcius){
+            temperature = i2c.getTemp();
+        }else{
+            temperature = i2c.getFTemp();
+        }
+        Serial.println(temperature);
     }
 }

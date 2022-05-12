@@ -7,6 +7,8 @@
 
 TaskHandle_t temperatureTask_Handler;
 
+float temperature = 0;
+
 #include <Button.h>
 #include <Led.h>
 #include <I2C.h>

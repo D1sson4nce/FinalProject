@@ -5,7 +5,7 @@
 class I2C {
     private:
         uint8_t address;
-        int16_t temperature;
+        float temperature;
     public:
         //Constructor
         I2C(uint8_t address) {
@@ -33,20 +33,19 @@ class I2C {
             uint8_t msb = Wire.read();
             uint8_t lsb = Wire.read();
 
-            int16_t raw = (int8_t)msb << 1 | lsb >> 7;
+            float raw = (int8_t)msb << 1 | lsb >> 7;
 
             raw = raw * 10 / 2;
 
             this->temperature = raw / 10;
         }
 
-        int16_t getTemp(){
+        float getTemp(){
             updateTemp();
             return this->temperature;
         }
 
-        int16_t getFTemp(){
-            updateTemp();
-            return this->temperature * (9 / 5) + 32;
+        float getFTemp(){
+            return (getTemp() * (9 / 5)) + 32;
         }
 };
