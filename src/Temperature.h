@@ -1,14 +1,8 @@
 static void temperatureTask(void *sTask){
-    Wire.begin();
-    Wire.beginTransmission(I2C_ADDRESS);
-    Wire.write(0xAC);
-    Wire.write(0x0C);
-    Wire.write(0x51);
-    Wire.beginTransmission(I2C_ADDRESS);
-    Wire.write(0x51);
-    Wire.endTransmission();
-
+    I2C i2c(0x48);
     while(true){
-        
+        int16_t temp = i2c.getFTemp();
+        Serial.println(temp);
+        vTaskDelay(500 / portTICK_PERIOD_MS);
     }
 }

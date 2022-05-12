@@ -9,5 +9,6 @@ TaskHandle_t temperatureTask_Handler;
 
 #include <Button.h>
 #include <Led.h>
+#include <I2C.h>
 #include <Web.h>
 #include <Temperature.h>
