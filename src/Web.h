@@ -32,9 +32,9 @@ static void listenForClientsTask(void *pvParams) {
                         client.println("Content-Type: text/html");
                         client.println("Connection: close");  // the connection will be closed after completion of the response
                         client.println("Refresh: 5");  // refresh the page automatically every 5 sec
-                        client.println();
                         client.println("<!DOCTYPE HTML>");
                         client.println("<html>");
+                        client.println("<meta http-equiv=\"refresh\" content=\"1\" />");
                         // output values
                         client.print("Temperature: ");
                         client.print(temperature);
