@@ -3,6 +3,8 @@
 #include <Arduino_FreeRTOS.h>
 #include <Ethernet2.h>
 
+#define I2C_ADDRESS 0x48
+
 TaskHandle_t temperatureTask_Handler;
 
 #include <Button.h>
