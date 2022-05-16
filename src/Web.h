@@ -7,14 +7,15 @@ byte mac[] = {
 IPAddress ip(192, 168, 1, 177);
 EthernetServer server(80);
 
+static void initWeb() {
+	Serial.println("Initializing web server");
+
+	Ethernet.begin(mac, ip);
+	server.begin();
+}
+
 static void listenForClientsTask(void *pvParams) {
-    Serial.println("Initializing web server");
-
-    Ethernet.begin(mac, ip);
-    server.begin();
-
-    while (true)
-    {
+	
         EthernetClient client = server.available();
         if (client)
         {
@@ -54,6 +55,6 @@ static void listenForClientsTask(void *pvParams) {
                 }
             }
         }
-        vTaskDelay(1/portTICK_PERIOD_MS);
-    }
+		delay(1);
+        // vTaskDelay(1/portTICK_PERIOD_MS);
 }
