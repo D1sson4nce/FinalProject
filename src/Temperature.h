@@ -3,7 +3,6 @@ static void temperatureTask(void *sTask){
 
     I2C i2c(0x48);
     Led led(7);
-    bool letGo = true;
     while(true){
         temperature = i2c.getTemp();
 
