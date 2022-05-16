@@ -1,18 +1,20 @@
 #include <Header.h>
 
 static void temperatureTask(void *sTask);
-static void listenForClientsTask(void *sTask);
+static void ledTask(void *sTask);
 
 void setup() {
   Serial.begin(9600);
   while (!Serial) {
       ;
   }
+
+  xTaskCreate(temperatureTask, "Temperature Task", 256, NULL, 1, &temperatureTask_Handler);
+  xTaskCreate(ledTask, "LED Task", 64, NULL, 1, &ledTask_Handler);
+
 	initWeb();
-  xTaskCreate(temperatureTask, "Temperature Task", 420, NULL, 1, &temperatureTask_Handler);
-//   xTaskCreate(listenForClientsTask, "Listen For Clients Task", 420, NULL, 1, &listenForClientsTask_Handler);
 }
 
 void loop() {
-	listenForClientsTask(NULL);
+	listenForClients();
 }

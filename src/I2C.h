@@ -44,8 +44,4 @@ class I2C {
             updateTemp();
             return this->temperature;
         }
-
-        float getFTemp(){
-            return (getTemp() * (9 / 5)) + 32;
-        }
 };

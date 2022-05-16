@@ -1,31 +1,32 @@
 static void temperatureTask(void *sTask){
+    Serial.println("Initializing temperature");
+
     I2C i2c(0x48);
-    Button btn(0);
+    Led led(7);
     bool letGo = true;
-    bool isUsingCelcius = true;
     while(true){
-        if(letGo && btn.isPressed()){
-            letGo = false;
-            if(isUsingCelcius){
-                isUsingCelcius = false;
-                Serial.println(temperature);
-            }else{
-                isUsingCelcius = true;
-                Serial.println(temperature);
+        temperature = i2c.getTemp();
+
+        static bool hasActiveLED = true;
+        if(temperature > 27){
+            if(!hasActiveLED){
+                vTaskResume(ledTask_Handler);
             }
-        }else if(!btn.isPressed()){
-            letGo = true;
-        }
-        if(isUsingCelcius){
-            temperature = i2c.getTemp();
+            hasActiveLED = true;
         }else{
-            temperature = i2c.getFTemp();
+            if(hasActiveLED){
+                vTaskSuspend(ledTask_Handler);
+                led.off();
+            }
+            hasActiveLED = false;
         }
+
+        vTaskDelay(1000/portTICK_PERIOD_MS);
     }
 }
 
 static void ledTask(void *sTask){
-    Led led(1);
+    Led led(7);
     while(true){
         led.on();
         vTaskDelay(500/portTICK_PERIOD_MS);
