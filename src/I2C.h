@@ -7,12 +7,18 @@ class I2C {
         uint8_t address;
         float temperature;
     public:
-        //Constructor
+        /**
+        * Constructor 
+        * @param address the address the IC2 needs to transmit to
+        */
         I2C(uint8_t address) {
             this->address = address;
             init();
         }
 
+        /**
+        * Initializes the I2C class
+        */
         void init() {
             Wire.begin();
             Wire.beginTransmission(address);
@@ -25,6 +31,9 @@ class I2C {
             updateTemp();
         }
 
+        /**
+        * Reads the temperature and calculates the value
+        */
         void updateTemp(){
             Wire.beginTransmission(address);
             Wire.write(0xAA);

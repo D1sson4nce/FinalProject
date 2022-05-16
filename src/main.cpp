@@ -1,3 +1,6 @@
+/** \file Header.h
+ * Header is for all the defines, includes and global variables
+ */
 #include <Header.h>
 
 static void temperatureTask(void *sTask);
