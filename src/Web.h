@@ -1,9 +1,14 @@
 byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
-};
-IPAddress ip(192, 168, 1, 177);
-EthernetServer server(80);
+}; /**< The specified mac address for the web server. */
 
+IPAddress ip(192, 168, 1, 177); /**< The specified ip address for the web server. */
+
+EthernetServer server(80); /**< Setting the server port */
+
+/**
+ * Initialize the web server with a mac and ip address.
+ */
 void initWeb() {
 	Serial.println("Initializing web server");
 
@@ -11,6 +16,9 @@ void initWeb() {
 	server.begin();
 }
 
+/**
+ * Listen once for a client. Called in a loop to listen continously.
+ */
 void listenForClients() {
     EthernetClient client = server.available();
 
