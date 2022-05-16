@@ -27,6 +27,7 @@ static void listenForClientsTask(void *pvParams) {
                     // newline character and currentLineIsBlank, http request has ended,
                     // so you can send a reply
                     if (c == '\n' && currentLineIsBlank) {
+                        Serial.write("here clitnet");
                         // send a standard http response header
                         client.println("HTTP/1.1 200 OK");
                         client.println("Content-Type: text/html");
@@ -34,7 +35,6 @@ static void listenForClientsTask(void *pvParams) {
                         client.println("Refresh: 5");  // refresh the page automatically every 5 sec
                         client.println("<!DOCTYPE HTML>");
                         client.println("<html>");
-                        client.println("<meta http-equiv=\"refresh\" content=\"1\" />");
                         // output values
                         client.print("Temperature: ");
                         client.print(temperature);
